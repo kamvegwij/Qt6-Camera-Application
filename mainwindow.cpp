@@ -7,9 +7,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //setup UI widgets:
+    //load available devices:
+    QVector<QString> loadedCameraDevices;
 
-    ui->capture_button->setEnabled(false);
+    for (const QCameraDevice &info : QMediaDevices::videoInputs())
+    {
+        QString deviceName = info.description();
+        loadedCameraDevices.append(deviceName);
+        ui->available_camera_devices_list->addItem(deviceName);
+    }
 
     //connect the camera:
 
@@ -24,12 +30,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_capture_button_clicked()
-{
-    capture_camera();
-}
-
-void MainWindow::capture_camera()
+void MainWindow::capture_image()
 {
     if (!m_camera->isActive()){
         m_camera->start();
@@ -37,5 +38,38 @@ void MainWindow::capture_camera()
     else{
         m_camera->stop();
     }
+}
+
+void MainWindow::capture_video()
+{
+
+}
+
+void MainWindow::capture_go_live()
+{
+
+}
+
+void MainWindow::on_capture_image_button_clicked()
+{
+    capture_image();
+}
+
+
+void MainWindow::on_capture_video_button_clicked()
+{
+
+}
+
+
+void MainWindow::on_go_live_button_clicked()
+{
+
+}
+
+
+void MainWindow::on_quit_app_button_clicked()
+{
+    QApplication::exit();
 }
 

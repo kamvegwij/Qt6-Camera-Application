@@ -7,24 +7,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //detect the camera:
-    QList<QCameraDevice> available_cameras = QMediaDevices::videoInputs();
+    //setup UI widgets:
 
-    for (const QCameraDevice &cameraDeviceInfo : available_cameras)
-    {
-        qDebug() << cameraDeviceInfo.description(); //display the found camera devices.
-    }
+    ui->capture_button->setEnabled(false);
 
     //connect the camera:
-    //m_camera.reset(QMediaDevices::defaultVideoInput());
-    QVideoWidget videoWidget;
-    videoWidget.resize(500,500);
-    videoWidget.setParent(ui->widget_camera_view);
-    videoWidget.show();
 
-    QMediaCaptureSession mediaCaptureSession;
-    mediaCaptureSession.setCamera(m_camera);
-    mediaCaptureSession.setVideoOutput(videoWidget);
+    m_camera.reset(new QCamera(QMediaDevices::defaultVideoInput()));
+    mediaCaptureSession.setCamera(m_camera.data());
+    mediaCaptureSession.setVideoOutput(ui->widget_camera_view);
+    m_camera->start();
 }
 
 MainWindow::~MainWindow()
@@ -41,12 +33,9 @@ void MainWindow::capture_camera()
 {
     if (!m_camera->isActive()){
         m_camera->start();
-        ui->capture_button->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
     }
     else{
         m_camera->stop();
-        ui->capture_button->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     }
-
 }
 

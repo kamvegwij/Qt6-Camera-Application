@@ -32,7 +32,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QScopedPointer<QCamera> m_camera;
-
+    QMediaCaptureSession mediaCaptureSession;
     void capture_camera();
 
 };

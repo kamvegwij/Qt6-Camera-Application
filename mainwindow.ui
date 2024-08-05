@@ -13,15 +13,40 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #e17055;
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="capture_button">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>470</y>
-      <width>93</width>
-      <height>71</height>
+      <x>650</x>
+      <y>480</y>
+      <width>61</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>ROG Fonts</family>
+      <pointsize>5</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	color: #dfe6e9;
+	background-color: #2d3436;
+	border-radius: 25px;
+}
+QPushButton::hover
+{
+	color: #dfe6e9;
+	background-color: #636e72;
+	border-radius: 23px;
+}</string>
     </property>
     <property name="text">
      <string>Capture</string>
@@ -36,6 +61,9 @@
       <height>451</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid #d63031;</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -47,7 +75,67 @@
      <height>26</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar
+{
+	color: #dfe6e9;
+	background-color: #2d3436;
+}
+QMenu
+{
+	background-color: #2d3436;
+}
+QAction
+{
+	border: 1px solid #dfe6e9;
+}</string>
+   </property>
+   <widget class="QMenu" name="menuHelp">
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionSupport_Jungo"/>
+   </widget>
+   <widget class="QMenu" name="menuDevices">
+    <property name="title">
+     <string>Devices</string>
+    </property>
+    <addaction name="actionSelect"/>
+    <addaction name="actionView"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuDevices"/>
+   <addaction name="menuHelp"/>
   </widget>
+  <action name="actionSupport_Jungo">
+   <property name="text">
+    <string>Support Jungo</string>
+   </property>
+  </action>
+  <action name="actionSelect">
+   <property name="text">
+    <string>Select</string>
+   </property>
+  </action>
+  <action name="actionView">
+   <property name="text">
+    <string>View</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

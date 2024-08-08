@@ -20,6 +20,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -50,9 +51,15 @@ public:
     QVBoxLayout *mixer_container;
     QSlider *mic_audio_slider;
     QSlider *camera_white_balance_slider;
+    QRadioButton *camera_state_toggle_button;
     QLabel *mic_audio_label;
     QLabel *mic_audio_label_2;
     QListWidget *available_camera_devices_list;
+    QLabel *mic_audio_label_3;
+    QLabel *warning_label;
+    QVideoWidget *captured_image_view;
+    QLabel *capture_label_2;
+    QPushButton *view_capture_button;
     QMenuBar *menubar;
     QMenu *menuHelp;
     QMenu *menuDevices;
@@ -62,7 +69,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1021, 706);
+        MainWindow->resize(1021, 720);
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: #2d3436;\n"
 ""));
         actionSupport_Jungo = new QAction(MainWindow);
@@ -77,11 +84,11 @@ public:
         centralwidget->setObjectName("centralwidget");
         widget_camera_view = new QVideoWidget(centralwidget);
         widget_camera_view->setObjectName("widget_camera_view");
-        widget_camera_view->setGeometry(QRect(-1, 9, 1021, 481));
+        widget_camera_view->setGeometry(QRect(-1, -1, 821, 491));
         widget_camera_view->setStyleSheet(QString::fromUtf8(""));
         verticalLayoutWidget = new QWidget(centralwidget);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(750, 530, 211, 143));
+        verticalLayoutWidget->setGeometry(QRect(750, 530, 211, 152));
         capture_options_container = new QVBoxLayout(verticalLayoutWidget);
         capture_options_container->setObjectName("capture_options_container");
         capture_options_container->setContentsMargins(0, 0, 0, 0);
@@ -105,7 +112,7 @@ public:
 "	width: 50px;\n"
 "	height: 150px;\n"
 "	color: #dfe6e9;\n"
-"	background-color: #636e72;\n"
+"	background-color: #b2bec3;\n"
 "	border-radius: 23px;\n"
 "}"));
 
@@ -127,7 +134,7 @@ public:
 "	width: 50px;\n"
 "	height: 150px;\n"
 "	color: #dfe6e9;\n"
-"	background-color: #636e72;\n"
+"	background-color: #b2bec3;\n"
 "	border-radius: 23px;\n"
 "}"));
 
@@ -149,7 +156,7 @@ public:
 "	width: 50px;\n"
 "	height: 150px;\n"
 "	color: #dfe6e9;\n"
-"	background-color: #636e72;\n"
+"	background-color: #b2bec3;\n"
 "	border-radius: 23px;\n"
 "}"));
 
@@ -163,7 +170,7 @@ public:
 "	width: 50px;\n"
 "	height: 30px;\n"
 "	color: #dfe6e9;\n"
-"	background-color: #636e72;\n"
+"	background-color: #d63031;\n"
 "	border-radius: 25px;\n"
 "}\n"
 "QPushButton::hover\n"
@@ -171,7 +178,7 @@ public:
 "	width: 50px;\n"
 "	height: 150px;\n"
 "	color: #dfe6e9;\n"
-"	background-color: #636e72;\n"
+"	background-color: #b2bec3;\n"
 "	border-radius: 23px;\n"
 "}"));
 
@@ -179,7 +186,7 @@ public:
 
         horizontalLayoutWidget = new QWidget(centralwidget);
         horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(9, 490, 1001, 31));
+        horizontalLayoutWidget->setGeometry(QRect(-1, 490, 1021, 31));
         header_container = new QHBoxLayout(horizontalLayoutWidget);
         header_container->setObjectName("header_container");
         header_container->setContentsMargins(0, 0, 0, 0);
@@ -221,7 +228,7 @@ public:
 
         verticalLayoutWidget_2 = new QWidget(centralwidget);
         verticalLayoutWidget_2->setObjectName("verticalLayoutWidget_2");
-        verticalLayoutWidget_2->setGeometry(QRect(479, 529, 191, 131));
+        verticalLayoutWidget_2->setGeometry(QRect(459, 529, 201, 121));
         mixer_container = new QVBoxLayout(verticalLayoutWidget_2);
         mixer_container->setObjectName("mixer_container");
         mixer_container->setContentsMargins(0, 0, 0, 0);
@@ -273,20 +280,32 @@ public:
 
         mixer_container->addWidget(camera_white_balance_slider);
 
-        mic_audio_label = new QLabel(centralwidget);
-        mic_audio_label->setObjectName("mic_audio_label");
-        mic_audio_label->setGeometry(QRect(350, 560, 81, 20));
+        camera_state_toggle_button = new QRadioButton(verticalLayoutWidget_2);
+        camera_state_toggle_button->setObjectName("camera_state_toggle_button");
         QFont font2;
         font2.setFamilies({QString::fromUtf8("PT Bold Stars")});
         font2.setPointSize(9);
-        mic_audio_label->setFont(font2);
+        font2.setBold(true);
+        camera_state_toggle_button->setFont(font2);
+        camera_state_toggle_button->setStyleSheet(QString::fromUtf8("background-color: #636e72;\n"
+"color: #dfe6e9;"));
+
+        mixer_container->addWidget(camera_state_toggle_button, 0, Qt::AlignLeft);
+
+        mic_audio_label = new QLabel(centralwidget);
+        mic_audio_label->setObjectName("mic_audio_label");
+        mic_audio_label->setGeometry(QRect(350, 550, 81, 20));
+        QFont font3;
+        font3.setFamilies({QString::fromUtf8("PT Bold Stars")});
+        font3.setPointSize(9);
+        mic_audio_label->setFont(font3);
         mic_audio_label->setStyleSheet(QString::fromUtf8("color: #dfe6e9;\n"
 "background-color: transparent;"));
         mic_audio_label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         mic_audio_label_2 = new QLabel(centralwidget);
         mic_audio_label_2->setObjectName("mic_audio_label_2");
-        mic_audio_label_2->setGeometry(QRect(350, 610, 121, 20));
-        mic_audio_label_2->setFont(font2);
+        mic_audio_label_2->setGeometry(QRect(350, 580, 121, 20));
+        mic_audio_label_2->setFont(font3);
         mic_audio_label_2->setStyleSheet(QString::fromUtf8("color: #dfe6e9;\n"
 "background-color: transparent;"));
         mic_audio_label_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
@@ -294,7 +313,58 @@ public:
         available_camera_devices_list->setObjectName("available_camera_devices_list");
         available_camera_devices_list->setGeometry(QRect(15, 530, 321, 141));
         available_camera_devices_list->setStyleSheet(QString::fromUtf8("background-color: transparent;\n"
-"border: 1px solid #e84393;"));
+"border: 1px solid #e84393;\n"
+"color: #dfe6e9;"));
+        mic_audio_label_3 = new QLabel(centralwidget);
+        mic_audio_label_3->setObjectName("mic_audio_label_3");
+        mic_audio_label_3->setGeometry(QRect(350, 620, 121, 20));
+        mic_audio_label_3->setFont(font3);
+        mic_audio_label_3->setStyleSheet(QString::fromUtf8("color: #dfe6e9;\n"
+"background-color: transparent;"));
+        mic_audio_label_3->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        warning_label = new QLabel(centralwidget);
+        warning_label->setObjectName("warning_label");
+        warning_label->setGeometry(QRect(340, 650, 401, 21));
+        QFont font4;
+        font4.setFamilies({QString::fromUtf8("PT Bold Stars")});
+        warning_label->setFont(font4);
+        warning_label->setStyleSheet(QString::fromUtf8("background-color: #81ecec;\n"
+"color: #2d3436;"));
+        warning_label->setAlignment(Qt::AlignCenter);
+        captured_image_view = new QVideoWidget(centralwidget);
+        captured_image_view->setObjectName("captured_image_view");
+        captured_image_view->setGeometry(QRect(830, 30, 181, 161));
+        captured_image_view->setStyleSheet(QString::fromUtf8("background-color: #81ecec;\n"
+"border: 3px solid #b2bec3;"));
+        capture_label_2 = new QLabel(centralwidget);
+        capture_label_2->setObjectName("capture_label_2");
+        capture_label_2->setGeometry(QRect(830, 0, 181, 29));
+        capture_label_2->setFont(font1);
+        capture_label_2->setStyleSheet(QString::fromUtf8("background-color: #e17055;\n"
+"color: #dfe6e9;\n"
+"border: none;"));
+        capture_label_2->setFrameShape(QFrame::Panel);
+        capture_label_2->setAlignment(Qt::AlignCenter);
+        view_capture_button = new QPushButton(centralwidget);
+        view_capture_button->setObjectName("view_capture_button");
+        view_capture_button->setGeometry(QRect(950, 190, 61, 31));
+        view_capture_button->setFont(font);
+        view_capture_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"	color: #2d3436;\n"
+"	width: 50px;\n"
+"	height: 30px;\n"
+"	background-color: #81ecec;\n"
+"	border: 3px solid #b2bec3;\n"
+"}\n"
+"QPushButton::hover\n"
+"{\n"
+"	color: #2d3436;\n"
+"	width: 50px;\n"
+"	height: 150px;\n"
+"	background-color: #b2bec3;\n"
+"	border: 3px solid #b2bec3;\n"
+"}"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -306,10 +376,12 @@ public:
 "}\n"
 "QMenu\n"
 "{\n"
+"	color: #dfe6e9;\n"
 "	background-color: #2d3436;\n"
 "}\n"
 "QAction\n"
 "{\n"
+"	color: #dfe6e9;\n"
 "	border: 1px solid #dfe6e9;\n"
 "}"));
         menuHelp = new QMenu(menubar);
@@ -345,11 +417,16 @@ public:
         capture_video_button->setText(QCoreApplication::translate("MainWindow", "Capture Video", nullptr));
         go_live_button->setText(QCoreApplication::translate("MainWindow", "Go Live", nullptr));
         quit_app_button->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
-        devices_label->setText(QCoreApplication::translate("MainWindow", "Devices", nullptr));
-        mixer_label->setText(QCoreApplication::translate("MainWindow", "Mixer", nullptr));
+        devices_label->setText(QCoreApplication::translate("MainWindow", "Available Devices", nullptr));
+        mixer_label->setText(QCoreApplication::translate("MainWindow", "Settings", nullptr));
         capture_label->setText(QCoreApplication::translate("MainWindow", "Capture Options", nullptr));
+        camera_state_toggle_button->setText(QCoreApplication::translate("MainWindow", "Off", nullptr));
         mic_audio_label->setText(QCoreApplication::translate("MainWindow", "Mic Audio", nullptr));
         mic_audio_label_2->setText(QCoreApplication::translate("MainWindow", "White Balance", nullptr));
+        mic_audio_label_3->setText(QCoreApplication::translate("MainWindow", "Camera State", nullptr));
+        warning_label->setText(QCoreApplication::translate("MainWindow", "Camera is not active.", nullptr));
+        capture_label_2->setText(QCoreApplication::translate("MainWindow", "Captures", nullptr));
+        view_capture_button->setText(QCoreApplication::translate("MainWindow", "View", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuDevices->setTitle(QCoreApplication::translate("MainWindow", "Devices", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
